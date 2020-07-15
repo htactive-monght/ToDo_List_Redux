@@ -1,0 +1,103 @@
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+.logo {
+  height: 32px;
+  background: rgba(3, 3, 3, 0.2);
+  margin: 16px;
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+/* --------------------To list------------- */
+
+
+.divtask input {
+  width: 1020px;
+  height: 50px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border-color: rgb(233, 233, 233);
+}
+.divTodo{
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  position: relative;
+  padding: 20px 15px 20px 20px;
+  overflow: hidden;
+  margin: 0px 0px 15px;
+  background: rgb(255, 255, 255);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(233, 233, 233);
+  margin-top: 10px;
+  font-size: 20px;
+}
+.divTaskName{
+  margin-left: 15px;
+  font-size: 20px;
+}
+.divTaskName textarea{
+  font-size: 14px;
+  width: 850px;
+  color: rgb(106, 108, 106);
+  line-height: 24px;
+  height: 30px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: none;
+  box-sizing: content-box;
+  resize: vertical;
+  padding: 10px 15px;
+  margin: 0px;
+  border-width: 0px;
+  border-style: initial;
+  border-color: initial;
+  border-image: initial;
+  border-radius: 3px;
+  transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+
+} 
+.divIcon{
+    font-size: 16px;
+    color: rgb(45, 52, 70);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: rgb(255, 255, 255);
+    margin-left: -1px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(233, 233, 233);
+    margin-left: 10px;
+}
+/* ----------------Menu------------- */
+.menu{
+  display: flex;
+  justify-content: flex-end;
+}
+.menu a {
+margin-left: 10px;
+font-size: 15px;
+color: rgb(121, 121, 121);
+margin-top: 10px;
+/* border-right: 0.4px solid  rgb(106, 108, 106); */
+
+}
