@@ -1,16 +1,13 @@
-/* eslint-disable no-sequences */
-import React,{useState, useEffect,useRef} from 'react'
+import React,{useState, useEffect} from 'react'
 import {connect} from 'react-redux'
-import Menu from './Menu'
-import {DeleteOutlined, EditOutlined, CheckOutlined } from '@ant-design/icons';
-
+import Showdata from './Showdata'
+import Header from './header'
 
 function AddToDo (props){
   const {todo} = props;
   const [todoList, setTodoList] = useState(todo)
   const [taskName, setTaskName] = useState('');
-  // const [taskNameEdit, setTaskNameEdit] = useState('');
-  const textarea = useRef(null);
+  
   useEffect(() => {
     setTodoList(todo)
   }, [todo])
@@ -23,12 +20,11 @@ function AddToDo (props){
       }else{
         const newColor = getRandomColor()
         dispatch({type:'ADD_TODO', newTodo:{taskname: taskName,
-        color: newColor, isUpdate: false}})
+        color: newColor, isUpdate: false, ischeck: false}})
         setTaskName("");
       }
     }
   }
-
   function handleDelete (index){
     const {dispatch} = props;
     dispatch({type:'DELETE_TODO',index: index})
@@ -36,13 +32,11 @@ function AddToDo (props){
   
   const handleEdit =(index)=>{
     const {dispatch} = props;
-    dispatch({type:'EDIT_TODO', index: index, tasknames:{
-      taskname: todoList
-    }})
+    dispatch({type:'EDIT_TODO', index: index,
+      tasknames:  todoList[index].taskname
+    })
   }
-  function handleFocus(){
-    textarea.current.focus()
-  }
+ 
   const getRandomColor = ()=>{
     const color_list = ['green', 'red', 'blue', 'yellow','deeppink']
     const randomIndex = Math.trunc(Math.random()*5);
@@ -58,40 +52,42 @@ function AddToDo (props){
     })
     setTodoList(list);
   }
-
- 
+  const handleComple = () => {
+    setTodoList(todo.filter(item => item.ischeck === true))
+   }
+   const handleUnComple = () => {
+    setTodoList(todo.filter(item => item.ischeck === false))
+   }
+   const handleAll = () => {
+    setTodoList(todo)
+   }
 return(
   <div>
+    <div>
+      <Header/>
+    </div>
     <div className="divtask">
       <input type="text" placeholder="Type here for add a new todo" 
         value={taskName} 
         onChange={e=>setTaskName(e.target.value)}
         onKeyDown={handleKeyDown}/>
+     <div className="menu">
+        <a onClick={handleAll}>All</a>
+        <a onClick={handleUnComple}>Uncompleted</a>
+        <a onClick={handleComple}>Completed</a>
+     </div>
+
     </div>
-    <div>
-      <Menu/>
-    </div>
-        {todoList.map((e, index) => <div key={index}>
-          <div className= "divTodo" style={{borderLeft: 3,borderLeftColor: e.color, borderLeftStyle: "solid"}}>
-            <div> 
-              <input type="checkbox"/>
-            </div>
-            <div className="divTaskName">
-              <textarea ref={textarea}  name="taskNameEdit" 
-                onChange={e=> updateEdit(index, e.target.value, 'taskname')}
-                value={todoList[index].taskname}
-                onClick={() => updateEdit(index, true, 'isUpdate')}
-              />
-            </div>
-            <div className="divIcon">
-              {e.isUpdate ? <CheckOutlined onClick={()=> {updateEdit(index, false, 'isUpdate');handleEdit(index)}}/>
-               :  <EditOutlined  onClick={()=>{updateEdit(index, true, 'isUpdate'); handleFocus();}}/>}
-            </div>
-            <div className="divIcon">
-              <DeleteOutlined onClick={()=>handleDelete(index)}/>
-            </div>
-          </div>
-        </div>)}
+        {todoList.map((e, index) => 
+         <Showdata
+         item = {e} 
+         indexs = {index} 
+         handleDelete={handleDelete}
+         handleEdit = {handleEdit}
+         updateEdit = {updateEdit}
+         key={index}
+        />
+        )}
   </div>
 )
 }

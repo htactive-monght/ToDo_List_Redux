@@ -1,3 +1,4 @@
+
 .trigger {
   font-size: 18px;
   line-height: 64px;
@@ -88,6 +89,13 @@
     border-color: rgb(233, 233, 233);
     margin-left: 10px;
 }
+.divIcon:hover{
+ color: #71C8F3
+}
+.divIcon button{
+  border: none;
+  font-size: 20px;
+}
 /* ----------------Menu------------- */
 .menu{
   display: flex;
@@ -100,4 +108,26 @@ color: rgb(121, 121, 121);
 margin-top: 10px;
 /* border-right: 0.4px solid  rgb(106, 108, 106); */
 
+}
+
+/* ---------------------Header Menu----------------- */
+.divHeaderMenu{
+  display: flex;
+  justify-content: flex-end;
+  font-size: 20px;
+  text-align: left;
+  position: relative;
+  padding: 20px 15px 20px 20px;
+  overflow: hidden;
+  margin: 0px 0px 15px;
+  background: rgb(255, 255, 255);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(233, 233, 233);
+}
+.headerIcon{
+  margin-left: 15px;
+}
+.ant-modal p {
+  margin: 0;
 }

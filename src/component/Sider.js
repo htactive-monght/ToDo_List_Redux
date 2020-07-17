@@ -11,9 +11,7 @@ import {
 } from '@ant-design/icons';
 const { Header, Sider } = Layout;
  function SiderToDo () {
-  const [collapsed, setCollapsed] = useState(false)
-  console.log("sao ko log đc vậy", collapsed);
- 
+  const [collapsed, setCollapsed] = useState(false) 
   const toggle = () => {
     setCollapsed({
       collapsed: ! collapsed,

@@ -4,6 +4,7 @@ export const addTodo = ()=>{
     type: types.ADD_TODO,
   }
 }
+
 export const deleteTodo = (index)=>{
   return{
     type: types.DELETE_TODO,
@@ -15,6 +16,16 @@ export const editTodo = (index)=>{
   return{
     type: types.EDIT_TODO,
     index: index
+  }
+}
+
+export const isChecked = (index, ischecks)=>{
+  return{
+    type: types.IS_CHECKED,
+    payload: {
+      index,
+      ischecks
+    }
   }
 }
 
