@@ -2,38 +2,39 @@ import React,{useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import Showdata from './Showdata'
 import Header from './header'
+import {Tabs} from 'antd'
+import { v1 as uuid } from 'uuid';
+import {useDispatch } from 'react-redux';
+
+
 
 function AddToDo (props){
+  const dispatch = useDispatch();
+  const [keyTab, setKeyTab] = useState("1")
+  const { TabPane } = Tabs;
   const {todo} = props;
   const [todoList, setTodoList] = useState(todo)
   const [taskName, setTaskName] = useState('');
-  
-  useEffect(() => {
-    setTodoList(todo)
-  }, [todo])
 
   const handleKeyDown = (e) => {
-    const {dispatch} = props;
     if (e.key === 'Enter') {
-      if(taskName ===""){
-        alert("Can you enter your name")
+      if(taskName === "" || taskName.trim() === ''){
+        alert("Your task name invalid")
       }else{
-        const newColor = getRandomColor()
-        dispatch({type:'ADD_TODO', newTodo:{taskname: taskName,
-        color: newColor, isUpdate: false, ischeck: false}})
-        setTaskName("");
-      }
+              const newColor = getRandomColor()
+              dispatch({type:'ADD_TODO', newTodo:{id: uuid(), taskname: taskName.trim(),
+              color: newColor, isUpdate: false, ischeck: false}})
+              setTaskName("");
+                }
     }
   }
-  function handleDelete (index){
-    const {dispatch} = props;
-    dispatch({type:'DELETE_TODO',index: index})
+  function handleDelete (id){
+    dispatch({type:'DELETE_TODO',id: id})
   }
   
   const handleEdit =(index)=>{
-    const {dispatch} = props;
-    dispatch({type:'EDIT_TODO', index: index,
-      tasknames:  todoList[index].taskname
+    dispatch({type:'EDIT_TODO', id: index,
+      tasknames:  todoList.find(value=>value.id === index).taskname
     })
   }
  
@@ -45,22 +46,44 @@ function AddToDo (props){
 
   const updateEdit = (index, value, name) => {
     const list = todoList.map((item, id) => {
-      if (index === id) {
+      if (item.id === index) {
         return {...item, [name]: value }
       }
       return item
     })
     setTodoList(list);
   }
+
   const handleComple = () => {
-    setTodoList(todo.filter(item => item.ischeck === true))
+    setTodoList(todo.filter(item => item.ischeck))
    }
    const handleUnComple = () => {
-    setTodoList(todo.filter(item => item.ischeck === false))
+    setTodoList(todo.filter(item => !item.ischeck))
    }
    const handleAll = () => {
     setTodoList(todo)
    }
+
+  function callback(key) {
+   setKeyTab(key)
+  }
+
+  useEffect(() => {
+    switch (keyTab) {
+      case "1":
+       handleAll();
+        break;
+      case "2":
+       handleUnComple();
+          break;
+      case "3":
+       handleComple();
+           break;
+      default:
+       setTodoList(todo)
+    }
+   }, [todo])
+
 return(
   <div>
     <div>
@@ -70,22 +93,24 @@ return(
       <input type="text" placeholder="Type here for add a new todo" 
         value={taskName} 
         onChange={e=>setTaskName(e.target.value)}
-        onKeyDown={handleKeyDown}/>
-     <div className="menu">
-        <a onClick={handleAll}>All</a>
-        <a onClick={handleUnComple}>Uncompleted</a>
-        <a onClick={handleComple}>Completed</a>
-     </div>
-
+        onKeyDown={handleKeyDown}
+        />
+      <div className="menu">
+        <Tabs defaultActiveKey={keyTab} onChange={callback} type="card" >
+          <TabPane tab={<a onClick={handleAll}>All</a>} key="1" ></TabPane>
+          <TabPane tab={<a onClick={handleUnComple}>Uncompleted</a>} key="2"></TabPane>
+          <TabPane tab={<a onClick={handleComple}>Completed</a>} key="3"></TabPane>
+        </Tabs>
+      </div>
     </div>
-        {todoList.map((e, index) => 
+        {todoList.map((e, id) => 
          <Showdata
-         item = {e} 
-         indexs = {index} 
-         handleDelete={handleDelete}
-         handleEdit = {handleEdit}
-         updateEdit = {updateEdit}
-         key={index}
+          item = {e} 
+          index = {id} 
+          handleDelete={handleDelete}
+          handleEdit = {handleEdit}
+          updateEdit = {updateEdit}
+          key={id}
         />
         )}
   </div>

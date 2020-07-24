@@ -1,10 +1,10 @@
 import React, {useRef} from 'react'
 import {connect} from 'react-redux'
-import {EditOutlined, CheckOutlined,   } from '@ant-design/icons';
+import {EditOutlined, CheckOutlined, CloseOutlined  } from '@ant-design/icons';
 import {isChecked} from './../action/Actions'
 
 function Showdata(props){
-  const {item, indexs, handleDelete, handleEdit, updateEdit, dispatch} = props;
+  const {item, index, handleDelete, handleEdit, updateEdit, dispatch} = props;
   const textarea = useRef(null);
 
   function handleFocus(){
@@ -13,26 +13,26 @@ function Showdata(props){
 
   return (
     <div>
-      <div key={indexs}>
+      <div key={index}>
             <div className= "divTodo" style={{borderLeft: 3,borderLeftColor: item.color, borderLeftStyle: "solid"}}>
               <div> 
                 <input type="checkbox" checked={item.ischeck} 
-                  onChange={() => dispatch(isChecked(indexs, !item.ischeck))}
+                  onChange={() => dispatch(isChecked(item.id, !item.ischeck)) }
                   />
               </div>
               <div className="divTaskName">
                 <textarea ref={textarea}  name="taskNameEdit" 
-                  onChange={e=> updateEdit(indexs, e.target.value, 'taskname')}
+                  onChange={e=> updateEdit(item.id, e.target.value, 'taskname')}
                   value={item.taskname}
-                  onClick={() => updateEdit(indexs, true, 'isUpdate')}
+                  onClick={() => updateEdit(item.id, true, 'isUpdate')}
                 />
               </div>
               <div className="divIcon">
-                {item.isUpdate ? <CheckOutlined onClick={()=> {updateEdit(indexs, false, 'isUpdate');handleEdit(indexs);}}/>
-                :  <EditOutlined  onClick={()=>{updateEdit(indexs, true, 'isUpdate'); handleFocus()}}/>}
+                {item.isUpdate ? <CheckOutlined onClick={()=> {updateEdit(item.id, false, 'isUpdate');handleEdit(item.id);}}/>
+                :  <EditOutlined  onClick={()=>{updateEdit(item.id, true, 'isUpdate'); handleFocus()}}/>}
               </div>
               <div className="divIcon">
-                <button onClick={()=>handleDelete(indexs)}>x</button>
+                <CloseOutlined  onClick={()=>handleDelete(item.id)}/>
               </div>
             </div>
       </div>

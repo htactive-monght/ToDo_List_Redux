@@ -1,11 +1,6 @@
 import * as types from './../constants/ActionTypes'
 const todo = {
-  todolist: [{
-    taskname: "Id velit est aliquid ut voluptas eligendi numquam",
-    color: "green",
-    isUpdate: false,
-    ischeck: false
-  }]
+  todolist: []
 }
 const reducerTodo = (state = todo, action)=>{
   switch(action.type){
@@ -15,18 +10,19 @@ const reducerTodo = (state = todo, action)=>{
       }
       case 'DELETE_TODO':
         return{
-          ...state, todolist:state.todolist.filter((value, index)=> index !== action.index)
+          ...state, todolist:state.todolist.filter((value, index)=> value.id !== action.id)
         }
       case 'EDIT_TODO':
         console.log("log trong reduce", action.tasknames);
         return{
           ...state, todolist: state.todolist.map(    
-            (item, index) => index === action.index ? {...item, taskname : action.tasknames}: item)}
+            (item, index) => item.id === action.id ? {...item, taskname : action.tasknames}: item)
+          }
       case types.IS_CHECKED:
         const {payload} = action
         return{
           ...state, todolist: state.todolist.map(    
-            (item, index) => index === payload.index ?
+            (item, index) => item.id === payload.id ?
             {...item, ischeck : payload.ischecks}:  item)}
        default: return state;     
   }

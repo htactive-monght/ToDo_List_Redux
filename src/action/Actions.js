@@ -5,25 +5,26 @@ export const addTodo = ()=>{
   }
 }
 
-export const deleteTodo = (index)=>{
+export const deleteTodo = (id)=>{
   return{
     type: types.DELETE_TODO,
-    index: index
+    id: id
   }
 }
 
-export const editTodo = (index)=>{
+export const editTodo = (id)=>{
+  console.log("action log", id);
   return{
     type: types.EDIT_TODO,
-    index: index
+    id: id
   }
 }
 
-export const isChecked = (index, ischecks)=>{
+export const isChecked = (id, ischecks)=>{
   return{
     type: types.IS_CHECKED,
     payload: {
-      index,
+      id,
       ischecks
     }
   }

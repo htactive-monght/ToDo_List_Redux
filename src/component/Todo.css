@@ -1,3 +1,4 @@
+/* -----------------------------sider---------------- */
 
 .trigger {
   font-size: 18px;
@@ -11,26 +12,36 @@
   color: #1890ff;
 }
 
-.logo {
-  height: 32px;
-  background: rgba(3, 3, 3, 0.2);
-  margin: 16px;
-}
-
 .site-layout .site-layout-background {
   background: #fff;
 }
 
+.ant-menu-dark.ant-menu-inline {
+  width: 200px;
+  color: white;
+}
 /* --------------------To list------------- */
-
 
 .divtask input {
   width: 1020px;
+  font-size: 14px;
+  color: rgb(151, 151, 151);
   height: 50px;
-  margin-top: 10px;
-  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: none;
+  padding: 0px 15px;
+  margin: 0px;
+  border-width: 1px;
+  border-style: solid;
   border-color: rgb(233, 233, 233);
 }
+.divtask input:hover{
+  border-color: rgb(68, 130, 255);
+}
+.divtask input:focus{
+  border-color: rgb(68, 130, 255);
+}
+
 .divTodo{
   width: 100%;
   display: flex;
@@ -64,9 +75,6 @@
   padding: 10px 15px;
   margin: 0px;
   border-width: 0px;
-  border-style: initial;
-  border-color: initial;
-  border-image: initial;
   border-radius: 3px;
   transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
 
@@ -79,7 +87,6 @@
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    -webkit-box-pack: center;
     justify-content: center;
     flex-shrink: 0;
     background-color: rgb(255, 255, 255);
@@ -106,15 +113,13 @@ margin-left: 10px;
 font-size: 15px;
 color: rgb(121, 121, 121);
 margin-top: 10px;
-/* border-right: 0.4px solid  rgb(106, 108, 106); */
 
 }
-
 /* ---------------------Header Menu----------------- */
 .divHeaderMenu{
   display: flex;
   justify-content: flex-end;
-  font-size: 20px;
+  font-size: 25px;
   text-align: left;
   position: relative;
   padding: 20px 15px 20px 20px;
@@ -126,8 +131,24 @@ margin-top: 10px;
   border-color: rgb(233, 233, 233);
 }
 .headerIcon{
-  margin-left: 15px;
+  margin-left: 20px;
 }
 .ant-modal p {
   margin: 0;
+}
+/* --------------------------search--------------- */
+.search input{
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  border-radius: 5px;
+  background: #f1f1f1;
+}
+.search button{
+  float: left;
+  padding: 10px;
+  font-size: 20px;
+  border: none;
 }
